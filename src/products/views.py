@@ -10,7 +10,7 @@ def chart_select_view(request):
     # print(product_df)
     # print(purchase_df)
     product_df['product_id'] = product_df['id']
-    df = pd.merge(purchase_df, product_df, on='product_id')
+    df = pd.merge(purchase_df, product_df, on='product_id').drop(['id_y', 'date_y'], axis=1).rename({'id_x': 'id', 'date_x': 'date'}, axis=1)
     context = {
         'products' : product_df.to_html(),
         'purchase' : purchase_df.to_html(),
